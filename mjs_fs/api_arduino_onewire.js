@@ -2,7 +2,7 @@
 // [mgos_arduino_onewire.h](https://github.com/cesanta/mongoose-os/blob/master/mos_libs/arduino-compat/src/mgos_arduino_onewire.h)
 
 let OneWire = {
-  _init: ffi('void *mgos_arduino_onewire_init(int)'),
+  _init: ffi('void *mgos_arduino_onewire_create(int)'),
   _cls: ffi('void mgos_arduino_onewire_close(void *)'),
   _rst: ffi('int mgos_arduino_onewire_reset(void *)'),
   _sel: ffi('void mgos_arduino_onewire_select(void *, char *)'),

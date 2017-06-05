@@ -9,7 +9,7 @@
 
 #if MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE
 
-OneWire *mgos_arduino_onewire_init(uint8_t pin) {
+OneWire *mgos_arduino_onewire_create(uint8_t pin) {
   return new OneWire(pin);
 }
 
