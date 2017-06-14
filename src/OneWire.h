@@ -6,7 +6,7 @@
 #include "Arduino.h"
 #include "fw/src/mgos_onewire.h"
 
-#if MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE
+#if MGOS_ENABLE_ONEWIRE
 
 class OneWire {
  public:
@@ -74,6 +74,6 @@ class OneWire {
   struct mgos_onewire *ow_;  // The mgos_onewire handle
 };
 
-#endif /* MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE */
+#endif /* MGOS_ENABLE_ONEWIRE */
 
 #endif /* CS_FW_SRC_ARDUINO_ONEWIRE_H_ */

@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#if MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE
+#if MGOS_ENABLE_ONEWIRE
 
 OneWire *mgos_arduino_onewire_create(uint8_t pin);
 void mgos_arduino_onewire_close(OneWire *ow);
@@ -34,7 +34,7 @@ void mgos_arduino_onewire_target_search(OneWire *ow, uint8_t family_code);
 uint8_t mgos_arduino_onewire_search(OneWire *ow, uint8_t *newAddr, uint8_t search_mode);
 uint8_t mgos_arduino_onewire_crc8(OneWire *ow, const uint8_t *addr, uint8_t len);
 
-#endif /* MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE */
+#endif /* MGOS_ENABLE_ONEWIRE */
 
 #ifdef __cplusplus
 }

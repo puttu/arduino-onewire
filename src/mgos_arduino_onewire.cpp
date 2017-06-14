@@ -7,7 +7,7 @@
 
 #include "mgos_arduino_onewire.h"
 
-#if MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE
+#if MGOS_ENABLE_ONEWIRE
 
 OneWire *mgos_arduino_onewire_create(uint8_t pin) {
   return new OneWire(pin);
@@ -90,4 +90,4 @@ uint8_t mgos_arduino_onewire_crc8(OneWire *ow, const uint8_t *addr, uint8_t len)
   return ow->crc8(addr, len);
 }
 
-#endif /* MGOS_ENABLE_ARDUINO_API && MGOS_ENABLE_ONEWIRE */
+#endif /* MGOS_ENABLE_ONEWIRE */
