@@ -1,5 +1,5 @@
 // Arduino OneWire library API. Source C API is defined at:
-// [mgos_arduino_onewire.h](https://github.com/cesanta/mongoose-os/blob/master/mos_libs/arduino-compat/src/mgos_arduino_onewire.h)
+// [mgos_arduino_onewire.h](https://github.com/mongoose-os-libs/arduino-onewire/blob/master/src/mgos_arduino_onewire.h)
 
 let OneWire = {
   _init: ffi('void *mgos_arduino_onewire_create(int)'),
