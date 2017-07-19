@@ -8,7 +8,7 @@
 #ifndef _MGOS_ARDUINO_ONEWIRE_H_
 #define _MGOS_ARDUINO_ONEWIRE_H_
 
-#include "fw/src/mgos_features.h"
+#include "mgos_features.h"
 #include "OneWire.h"
 
 #ifdef __cplusplus

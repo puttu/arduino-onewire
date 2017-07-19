@@ -4,7 +4,7 @@
 /* clang-format off */
 #include <stdint.h>
 #include "Arduino.h"
-#include "fw/src/mgos_onewire.h"
+#include "mgos_onewire.h"
 
 #if MGOS_ENABLE_ONEWIRE
 
