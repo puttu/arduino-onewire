@@ -9,7 +9,12 @@
 #define _MGOS_ARDUINO_ONEWIRE_H_
 
 #include "mgos_features.h"
+#ifdef __cplusplus
 #include "OneWire.h"
+#else
+typedef struct OneWireTag OneWire;
+#endif
+
 
 #ifdef __cplusplus
 extern "C" {
