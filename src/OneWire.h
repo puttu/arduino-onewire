@@ -6,8 +6,6 @@
 #include "Arduino.h"
 #include "mgos_onewire.h"
 
-#if MGOS_ENABLE_ONEWIRE
-
 class OneWire {
  public:
   OneWire(uint8_t pin);
@@ -73,7 +71,5 @@ class OneWire {
  private:
   struct mgos_onewire *ow_;  // The mgos_onewire handle
 };
-
-#endif /* MGOS_ENABLE_ONEWIRE */
 
 #endif /* CS_FW_SRC_ARDUINO_ONEWIRE_H_ */

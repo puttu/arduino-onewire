@@ -8,10 +8,8 @@
 
 #include "OneWire.h"
 
-#if MGOS_ENABLE_ONEWIRE
-
 OneWire::OneWire(uint8_t pin) {
-  ow_ = mgos_onewire_init(pin);
+  ow_ = mgos_onewire_create(pin);
 }
 
 OneWire::~OneWire() {
@@ -75,5 +73,3 @@ uint8_t OneWire::search(uint8_t *newAddr, bool search_mode /* = true */) {
 uint8_t OneWire::crc8(const uint8_t *addr, uint8_t len) {
   return mgos_onewire_crc8(addr, len);
 }
-
-#endif /* MGOS_ENABLE_ONEWIRE */

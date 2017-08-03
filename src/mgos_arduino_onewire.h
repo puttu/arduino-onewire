@@ -8,7 +8,6 @@
 #ifndef _MGOS_ARDUINO_ONEWIRE_H_
 #define _MGOS_ARDUINO_ONEWIRE_H_
 
-#include "mgos_features.h"
 #ifdef __cplusplus
 #include "OneWire.h"
 #else
@@ -19,8 +18,6 @@ typedef struct OneWireTag OneWire;
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#if MGOS_ENABLE_ONEWIRE
 
 OneWire *mgos_arduino_onewire_create(uint8_t pin);
 void mgos_arduino_onewire_close(OneWire *ow);
@@ -38,8 +35,6 @@ void mgos_arduino_onewire_reset_search(OneWire *ow);
 void mgos_arduino_onewire_target_search(OneWire *ow, uint8_t family_code);
 uint8_t mgos_arduino_onewire_search(OneWire *ow, uint8_t *newAddr, uint8_t search_mode);
 uint8_t mgos_arduino_onewire_crc8(OneWire *ow, const uint8_t *addr, uint8_t len);
-
-#endif /* MGOS_ENABLE_ONEWIRE */
 
 #ifdef __cplusplus
 }
