@@ -20,79 +20,170 @@ let OneWire = {
   _crc8: ffi('int mgos_arduino_onewire_crc8(void *, char *, int)'),
   _dly: ffi('void mgos_msleep(int)'),
 
-  _proto: {
-    // Close OneWire handle. Return value: none.
-    close: function() {
-      return OneWire._cls(this.ow);
-    },
-
-    reset: function() {
-      return OneWire._rst(this.ow);
-    },
-
-    select: function(addr) {
-      return OneWire._sel(this.ow, addr);
-    },
-
-    skip: function() {
-      return OneWire._sp(this.ow);
-    },
-
-    write: function(v) {
-      return OneWire._w(this.ow, v);
-    },
-
-    write_bytes: function(buf, len) {
-      return OneWire._wbs(this.ow, buf, len);
-    },
-
-    read: function() {
-      return OneWire._r(this.ow);
-    },
-
-    read_bytes: function(buf, len) {
-      return OneWire._rbs(this.ow, buf, len);
-    },
-
-    write_bit: function(v) {
-      return OneWire._wb(this.ow, v);
-    },
-
-    read_bit: function() {
-      return OneWire._rb(this.ow);
-    },
-
-    depower: function() {
-      return OneWire._dp(this.ow);
-    },
-
-    reset_search: function() {
-      return OneWire._rsch(this.ow);
-    },
-
-    target_search: function(fc) {
-      return OneWire._tsch(this.ow, fc);
-    },
-
-    search: function(addr, mde) {
-      return OneWire._sch(this.ow, addr, mde);
-    },
-
-    crc8: function(addr, len) {
-      return OneWire._crc8(this.ow, addr, len);
-    },
-
-    delay: function(t) {
-      return OneWire._dly(t);
-    },
-  },
-
-  // Create a OneWire object.
+  // ## **`OneWire.create()`**
+  // Create a OneWire object instance. Return value: an object with the methods
+  // described below.
   create: function(pin) {
     let obj = Object.create(OneWire._proto);
     // Initialize OneWire library.
     // Return value: OneWire handle opaque pointer.
     obj.ow = OneWire._init(pin);
     return obj;
+  },
+
+  _proto: {
+    // ## **`myOW.close()`**
+    // Close OneWire handle. Return value: none.
+    close: function() {
+      return OneWire._cls(this.ow);
+    },
+
+    // ## **`myOW.reset()`**
+    // Reset the 1-wire bus. Usually this is needed before communicating with
+    // any device.
+    reset: function() {
+      return OneWire._rst(this.ow);
+    },
+
+    // ## **`myOW.select(addr)`**
+    // Select a device based on its address `addr`, which is a 8-byte string.
+    // After a reset, this is needed to choose which device you will use, and
+    // then all communication will be with that device, until another reset.
+    // Example:
+    // ```javascript
+    // myOW.select("\x28\xff\x2b\x45\x4c\x04\x00\x10");
+    // ```
+    select: function(addr) {
+      return OneWire._sel(this.ow, addr);
+    },
+
+    // ## **`myOW.skip()`**
+    // Skip the device selection. This only works if you have a single device,
+    // but you can avoid searching and use this to immediately access your
+    // device.
+    skip: function() {
+      return OneWire._sp(this.ow);
+    },
+
+    // ## **`myOW.write(v)`**
+    // Write a byte to the onewire bus. Example:
+    // ```javascript
+    // // Write 0x12 to the onewire bus
+    // myOW.write(0x12);
+    // ```
+    write: function(v) {
+      return OneWire._w(this.ow, v);
+    },
+
+    // ## **`myOW.write_bytes(buf, len)`**
+    // Write first `len` bytes of the string `buf`. Example:
+    // ```javascript
+    // // Write [0x55, 0x66, 0x77] to the onewire bus
+    // myOW.write_bytes("\x55\x66\x77", 3);
+    // 111
+    write_bytes: function(buf, len) {
+      return OneWire._wbs(this.ow, buf, len);
+    },
+
+    // ## **`myOW.read()`**
+    // Read a byte from the onewire bus. Example:
+    // ```javascript
+    // let b = myOW.read();
+    // print('read:', b);
+    // ```
+    read: function() {
+      return OneWire._r(this.ow);
+    },
+
+    // ## **`myOW.read_bytes(buf, len)`**
+    // Read multiple bytes from the onewire bus. The given buffer should
+    // be large enough to fit the data; otherwise it will result in memory
+    // corruption and thus undefined behavior.
+    // Return value: none.
+    // Example:
+    // ```javascript
+    // let buf = "          ";
+    // myOW.read_bytes(buf, 10);
+    // print('read:', buf);
+    // ```
+    read_bytes: function(buf, len) {
+      return OneWire._rbs(this.ow, buf, len);
+    },
+
+    // ## **`myOW.write_bit(v)`**
+    // Write a single bit to the onewire bus. Given `v` should be a number:
+    // either 0 or 1.
+    write_bit: function(v) {
+      return OneWire._wb(this.ow, v);
+    },
+
+    // ## **`myOW.read_bit()`**
+    // Read a single bit from the onewire bus. Returned value is either 0 or 1.
+    // either 0 or 1.
+    read_bit: function() {
+      return OneWire._rb(this.ow);
+    },
+
+    // ## **`myOW.depower()`**
+    // Not implemented yet.
+    depower: function() {
+      return OneWire._dp(this.ow);
+    },
+
+    // ## **`myOW.search(addr, mode)`**
+    // Search for the next device. The given `addr` should be an string
+    // containing least 8 bytes (any bytes). If a device is found, `addr` is
+    // filled with the device's address and 1 is returned. If no more
+    // devices are found, 0 is returned.
+    // `mode` is an integer: 0 means normal search, 1 means conditional search.
+    // Example:
+    // ```javascript
+    // let addr = "        ";
+    // let res = myOW.search(addr, 0);
+    // if (res == 1) {
+    //   print("Found:", addr);
+    // } else {
+    //   print("Not found");
+    // }
+    // ```
+    search: function(addr, mode) {
+      return OneWire._sch(this.ow, addr, mode);
+    },
+
+    // ## **`myOW.reset_search()`**
+    // Reset a search. Next use of `myOW.search(....)` will begin at the first
+    // device.
+    reset_search: function() {
+      return OneWire._rsch(this.ow);
+    },
+
+    // ## **`myOW.target_search(fc)`**
+    // Setup the search to find the device type 'fc' (family code) on the next
+    // call to `myOW.search()` if it is present.
+    //
+    // If no devices of the desired family are currently on the bus, then
+    // device of some another type will be found by `search()`.
+    target_search: function(fc) {
+      return OneWire._tsch(this.ow, fc);
+    },
+
+    // ## **`myOW.crc8(buf, len)`**
+    // Calculate crc8 for the first `len` bytes of a string `buf`.
+    // Example:
+    // ```javascript
+    // // Calculate crc8 of the buffer
+    // let s = "foobar";
+    // let crc = myOW.crc8(s, 6);
+    // print("crc:", crc);
+    // ```
+    crc8: function(buf, len) {
+      return OneWire._crc8(this.ow, buf, len);
+    },
+
+    // ## **`myOW.delay(t)`**
+    // Delay `t` milliseconds.
+    delay: function(t) {
+      return OneWire._dly(t);
+    },
   },
 };
