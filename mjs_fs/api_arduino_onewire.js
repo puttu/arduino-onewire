@@ -119,7 +119,6 @@ let OneWire = {
 
     // ## **`myOW.read_bit()`**
     // Read a single bit from the onewire bus. Returned value is either 0 or 1.
-    // either 0 or 1.
     read_bit: function() {
       return OneWire._rb(this.ow);
     },
