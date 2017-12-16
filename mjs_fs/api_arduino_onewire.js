@@ -80,7 +80,7 @@ let OneWire = {
     // ```javascript
     // // Write [0x55, 0x66, 0x77] to the onewire bus
     // myOW.write_bytes("\x55\x66\x77", 3);
-    // 111
+    // ```
     write_bytes: function(buf, len) {
       return OneWire._wbs(this.ow, buf, len);
     },
@@ -139,7 +139,7 @@ let OneWire = {
     // ```javascript
     // let addr = "        ";
     // let res = myOW.search(addr, 0);
-    // if (res == 1) {
+    // if (res === 1) {
     //   print("Found:", addr);
     // } else {
     //   print("Not found");
