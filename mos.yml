@@ -11,7 +11,7 @@ build_vars:
 
 libs:
   - origin: https://github.com/mongoose-os-libs/arduino-compat
-  - origin: https://github.com/mongoose-os-libs/onewire
+  - origin: https://github.com/puttu/onewire
 
 tags:
   - arduino
